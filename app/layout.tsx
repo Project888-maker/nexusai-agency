@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import './additions.css'
 
 export const metadata: Metadata = {
   title: 'NexusAI — AI systems that answer, qualify and automate',
