@@ -1,9 +1,11 @@
 'use client'
 
+import Link from 'next/link'
 import { FormEvent, useMemo, useState } from 'react'
 
 const links = [
   ['Systems', '#systems'],
+  ['Pricing', '#pricing'],
   ['How it works', '#workflow'],
   ['ROI', '#roi'],
   ['Delivery', '#delivery'],
@@ -82,19 +84,29 @@ function Services() {
     <section className="section services" id="systems">
       <div className="section-heading"><p className="eyebrow">Three systems. Clear business outcomes.</p><h2>We do not sell “AI”. We install working infrastructure.</h2><p>Each system is designed around one measurable bottleneck and connected to the tools your team already uses.</p></div>
       <article className="service-feature">
-        <div className="service-copy"><span className="service-number">01</span><p className="service-kicker">AI phone receptionist</p><h3>Answer every call without turning your business into a call centre.</h3><p>A natural voice agent answers FAQs, qualifies the caller, checks availability, books appointments and escalates urgent cases to a person.</p><ul className="feature-list"><li>Inbound and missed-call recovery</li><li>Calendar and CRM integration</li><li>Transcripts, summaries and handover</li></ul></div>
+        <div className="service-copy"><span className="service-number">01</span><p className="service-kicker">AI phone receptionist</p><h3>Answer every call without turning your business into a call centre.</h3><p>A natural voice agent answers FAQs, qualifies the caller, checks availability, books appointments and escalates urgent cases to a person.</p><ul className="feature-list"><li>Inbound and missed-call recovery</li><li>Calendar and CRM integration</li><li>Transcripts, summaries and handover</li></ul><Link className="service-link" href="/ai-phone-receptionist">Explore the phone receptionist →</Link></div>
         <div className="demo-window phone-demo"><div className="demo-toolbar"><span /><span /><span /><b>Live call · 01:18</b></div><div className="caller-card"><span>H</span><div><strong>Hartwell Dental</strong><small>AI receptionist connected</small></div><i /></div><div className="transcript">{phoneTranscript.map(([speaker, text]) => <div key={text} className={`transcript-line speaker-${speaker.toLowerCase()}`}><b>{speaker}</b><p>{text}</p></div>)}</div><div className="demo-result"><span>Appointment booked</span><strong>Tuesday · 10:30</strong></div></div>
       </article>
       <article className="service-feature service-message">
         <div className="demo-window inbox-demo"><div className="demo-toolbar"><span /><span /><span /><b>Unified inbox</b></div><div className="inbox-layout"><div className="inbox-sidebar">{messageThreads.map(([channel, message, speed], index) => <div className={index === 0 ? 'thread active-thread' : 'thread'} key={channel}><span>{channel.slice(0, 1)}</span><div><strong>{channel}</strong><small>{message}</small></div><em>{speed}</em></div>)}</div><div className="chat-panel"><div className="chat-bubble incoming">Can you quote for a boiler service?</div><div className="chat-bubble outgoing">Yes. I need your postcode and boiler model, then I can give you the correct price and available times.</div><div className="qualification-row"><span>Qualified</span><span>Quote requested</span><span>High intent</span></div></div></div></div>
-        <div className="service-copy"><span className="service-number">02</span><p className="service-kicker">AI lead response agent</p><h3>Reply while the customer is still ready to buy.</h3><p>One agent handles website chat, WhatsApp, SMS and social enquiries, asks the right questions and moves qualified leads to the next step.</p><ul className="feature-list"><li>Consistent replies across every channel</li><li>Lead qualification and routing</li><li>Follow-up sequences without manual chasing</li></ul></div>
+        <div className="service-copy"><span className="service-number">02</span><p className="service-kicker">AI lead response agent</p><h3>Reply while the customer is still ready to buy.</h3><p>One agent handles website chat, WhatsApp, SMS and social enquiries, asks the right questions and moves qualified leads to the next step.</p><ul className="feature-list"><li>Consistent replies across every channel</li><li>Lead qualification and routing</li><li>Follow-up sequences without manual chasing</li></ul><Link className="service-link" href="/ai-lead-response">Explore the lead-response agent →</Link></div>
       </article>
       <article className="service-feature">
-        <div className="service-copy"><span className="service-number">03</span><p className="service-kicker">Workflow automation</p><h3>Stop paying skilled people to move information between systems.</h3><p>We connect forms, email, documents, CRMs and internal tools so routine work moves automatically—with approvals and human checks where they matter.</p><ul className="feature-list"><li>Document and data extraction</li><li>CRM, quoting and task automation</li><li>Error handling and full audit trail</li></ul></div>
+        <div className="service-copy"><span className="service-number">03</span><p className="service-kicker">Workflow automation</p><h3>Stop paying skilled people to move information between systems.</h3><p>We connect forms, email, documents, CRMs and internal tools so routine work moves automatically—with approvals and human checks where they matter.</p><ul className="feature-list"><li>Document and data extraction</li><li>CRM, quoting and task automation</li><li>Error handling and full audit trail</li></ul><Link className="service-link" href="/workflow-automation">Explore workflow automation →</Link></div>
         <div className="demo-window workflow-demo"><div className="demo-toolbar"><span /><span /><span /><b>New enquiry workflow</b></div><div className="workflow-stack">{workflowSteps.map(([number, label], index) => <div className="workflow-step" key={number} style={{ '--step': index } as React.CSSProperties}><span>{number}</span><strong>{label}</strong><i>Complete</i></div>)}</div><div className="workflow-summary"><span>Completed without manual entry</span><strong>00:42</strong></div></div>
       </article>
     </section>
   )
+}
+
+const pricing = [
+  { title: 'AI Phone Receptionist', price: 'From £2,500 setup', monthly: '+ £495/month', text: 'Inbound calls, qualification, booking, escalation, transcripts and handover.', href: '/ai-phone-receptionist' },
+  { title: 'AI Lead Response Agent', price: 'From £1,500 setup', monthly: '+ £349/month', text: 'Website chat, WhatsApp, SMS, qualification, booking and follow-up.', href: '/ai-lead-response' },
+  { title: 'Workflow Automation', price: 'Projects from £3,000', monthly: 'Support priced separately', text: 'Forms, email, documents, CRM, quoting, tasks and approval workflows.', href: '/workflow-automation' },
+]
+
+function Pricing() {
+  return <section className="section pricing-section" id="pricing"><div className="section-heading"><p className="eyebrow">Clear starting prices</p><h2>Start with one system. Expand after it proves its value.</h2><p>Final pricing depends on call volume, channels, integrations and exception handling. Every project is scoped before build work begins.</p></div><div className="pricing-grid">{pricing.map(item => <article className="pricing-card" key={item.title}><p className="service-kicker">{item.title}</p><h3>{item.price}</h3><strong>{item.monthly}</strong><p>{item.text}</p><Link href={item.href}>View service details →</Link></article>)}</div><p className="pricing-note">Usage beyond the agreed allowance and new integrations are quoted separately. No revenue guarantees.</p></section>
 }
 
 const stages = [
@@ -143,9 +155,9 @@ function LeadForm() {
 }
 
 function Footer() {
-  return <footer className="footer"><div className="brand footer-brand"><span className="brand-mark">N</span><span>NexusAI</span></div><p>Practical AI systems for calls, customer enquiries and operational workflows.</p><div className="footer-links"><a href="#systems">Systems</a><a href="#workflow">How it works</a><a href="#roi">ROI</a><a href="#contact">Contact</a></div><small>© {new Date().getFullYear()} NexusAI. Claims and case studies are published only when they can be verified.</small></footer>
+  return <footer className="footer"><div className="brand footer-brand"><span className="brand-mark">N</span><span>NexusAI</span></div><p>Practical AI systems for calls, customer enquiries and operational workflows.</p><div className="footer-links"><a href="#systems">Systems</a><a href="#pricing">Pricing</a><a href="#workflow">How it works</a><a href="#roi">ROI</a><a href="#contact">Contact</a></div><small>© {new Date().getFullYear()} NexusAI. Claims and case studies are published only when they can be verified.</small></footer>
 }
 
 export default function Site() {
-  return <><Header /><Hero /><ProblemStrip /><Services /><Workflow /><RoiCalculator /><Delivery /><LeadForm /><Footer /></>
+  return <><Header /><Hero /><ProblemStrip /><Services /><Pricing /><Workflow /><RoiCalculator /><Delivery /><LeadForm /><Footer /></>
 }
